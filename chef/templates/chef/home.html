@@ -8,12 +8,24 @@
     <link rel="stylesheet" href="{% static 'chef/css/style.css' %}">
 </head>
 <body>
+    <div class="container">
+        <h1>Ask Your Recipe - AI Master Chef</h1>
+        <p class="subtitle">Type your ingredients or dish idea and let AI Chef guide you 🍳</p>
 
-    <h1>Ask Your Recipe - AI Master Chef</h1>
-    <form method="post" action="{% url 'home' %}">{% csrf_token %}
-        {{form.recipe_message}}
-        <button type="submit">Ask</button>
-    </form>
-    <pre>{{ ai_recipe }}</pre>
+        <form method="post" action="{% url 'home' %}">
+            {% csrf_token %}
+            <div class="form-group">
+                {{ form.recipe_message }}
+            </div>
+            <button class="btn" type="submit">Ask</button>
+        </form>
+
+        {% if ai_recipe %}
+        <div class="result">
+            <h2>AI Chef Suggestion:</h2>
+            <pre>{{ ai_recipe }}</pre>
+        </div>
+        {% endif %}
+    </div>
 </body>
 </html>
